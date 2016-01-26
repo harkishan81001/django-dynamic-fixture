@@ -346,7 +346,7 @@ class DynamicFixture(object):
             else:
                 data = field.default
         elif field_has_choices(field):
-            data = field.flatchoices[0][0] # key of the first choice
+            data = field.flatchoices[0][0] if field.flatchoices else field.choices[0][0] # key of the first choice
         elif is_relationship_field(field):
             data = self._process_foreign_key(model_class, field, persist_dependencies)
         else:
